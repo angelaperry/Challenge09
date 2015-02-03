@@ -1,0 +1,34 @@
+<?php
+function IsFibo ($values) {
+	//Clean input
+	$clean = preg_replace('/[^0-9|\,]/', '', $values);
+	$clean = preg_replace('/\,{2,}/', ',', $clean);
+	if ($clean != $values)
+		echo "Invalid characters removed, resulting in ".$clean."<br />\n";
+	
+	//Process multiple numbers for each input
+	$inputs = explode(",", $clean);
+	foreach($inputs as $input) {
+	
+		//Set defaults
+		$num1 = 0;
+		$num2 = 1;
+		$result = 0;
+		$input == 0 ? $isfibo = "is a Fibonacci number" : $isfibo = "is not a Fibonacci number";
+		
+		//Find Fibonacci numbers
+		while ($result < $input) {
+			$result = $num1 + $num2;
+			if ($result == $input)
+				$isfibo = "is a Fibonacci number";
+			$num1 = $num2;
+			$num2 = $result;
+		}
+		
+		//Print result
+		echo $input." ".$isfibo."<br />\n";
+	}
+}
+
+IsFibo("54,55,56");
+?>
